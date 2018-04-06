@@ -56,19 +56,19 @@ def predictions():
         with open('RFMODEL2','rb') as Model:
             rfK = cPickle.load(Model)
 
-        df_loan = df_loan.append({'credit.policy': np.float32(creditPolicy), 
+        df_loan = df_loan.append({'credit.policy': np.float(creditPolicy), 
                     'purpose': purpose,
-                    'int.rate': np.float32(interestRate) , 
-                    'installment': np.float32(installment), 
-                    'log.annual.inc': np.float32(logAnnual),
-                    'dti': np.float32(dti), 
-                    'fico': np.float32(fico),
-                    'days.with.cr.line':np.float32(creditLine),
-                    'revol.bal': np.float32(revolvingBalance), 
-                    'revol.util': np.float32(revolvingUtilizationRate),
-                    'inq.last.6mths': np.float32(inqLast6mths), 
-                    'delinq.2yrs': np.float32(delinq2yrs), 
-                    'pub.rec': np.float32(pubRec), 
+                    'int.rate': np.float(interestRate) , 
+                    'installment': np.float(installment), 
+                    'log.annual.inc': np.float(logAnnual),
+                    'dti': np.float(dti), 
+                    'fico': np.float(fico),
+                    'days.with.cr.line':np.float(creditLine),
+                    'revol.bal': np.float(revolvingBalance), 
+                    'revol.util': np.float(revolvingUtilizationRate),
+                    'inq.last.6mths': np.float(inqLast6mths), 
+                    'delinq.2yrs': np.float(delinq2yrs), 
+                    'pub.rec': np.float(pubRec), 
                     'not.fully.paid': 1 # constant value
                                 },ignore_index=True)
 
