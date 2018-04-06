@@ -6,14 +6,14 @@ import _pickle as cPickle
 import os
 
 
-# MONGODB_URI = os.environ.get('MONGODB_URI')
-# if not MONGODB_URI:
-#     MONGODB_URI = "mongodb://localhost:5000/"
+MONGODB_URI = os.environ.get('MONGODB_URI')
+if not MONGODB_URI:
+    MONGODB_URI = "mongodb://localhost:5000/"
 
 app = Flask(__name__)
 
 
-# app.config['MONGO_URI'] = MONGODB_URI
+app.config['MONGO_URI'] = MONGODB_URI
 
 mongo = PyMongo(app)
 
@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 @app.route("/")
 def index ():
 
-   
+
     return render_template('index.html', location =  "Back Cover")
 
 
