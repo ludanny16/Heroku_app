@@ -94,7 +94,9 @@ def predictions():
         #return "Please enter valid information"
 
         
-
+@app.route("/test")
+def test():
+    return jsonify(mongo.db.resultsDB.find())
 
 
 @app.route("/data/results")
