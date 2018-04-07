@@ -28,7 +28,7 @@ def index ():
 @app.route("/send", methods=["GET", "POST"])
 def predictions():
 
-    try:
+    #try:
 
 
 
@@ -89,9 +89,9 @@ def predictions():
 
         return redirect('/', code=302) 
 
-    except:
+    #except:
 
-        return "Please enter valid information"
+        #return "Please enter valid information"
 
         
 
