@@ -27,24 +27,28 @@ def index ():
 
 @app.route("/send", methods=["GET", "POST"])
 def predictions():
-    #try:
-    mongo.db.resultsDB.remove()
 
-    if request.method == "POST":
-        creditPolicy = request.form['creditPolicy']
-        purpose =  request.form['purpose']
-        interestRate  =  request.form['interestRate']
-        installment =  request.form['installment']
-        logAnnual =  request.form['logAnnual']
-        dti =  request.form['dti']
-        fico =  request.form['fico']
-        creditLine =  request.form['creditLine']
-        revolvingBalance =  request.form['revolvingBalance']
-        revolvingUtilizationRate =  request.form['revolvingUtilizationRate']
-        inqLast6mths =  request.form['inqLast6mths']
-        delinq2yrs =  request.form['delinq2yrs']
-        pubRec =  request.form['pubRec']
-        loanAmount = request.form['loanAmount']
+    try:
+
+
+
+        mongo.db.resultsDB.remove()
+
+        if request.method == "POST":
+            creditPolicy = request.form['creditPolicy']
+            purpose =  request.form['purpose']
+            interestRate  =  request.form['interestRate']
+            installment =  request.form['installment']
+            logAnnual =  request.form['logAnnual']
+            dti =  request.form['dti']
+            fico =  request.form['fico']
+            creditLine =  request.form['creditLine']
+            revolvingBalance =  request.form['revolvingBalance']
+            revolvingUtilizationRate =  request.form['revolvingUtilizationRate']
+            inqLast6mths =  request.form['inqLast6mths']
+            delinq2yrs =  request.form['delinq2yrs']
+            pubRec =  request.form['pubRec']
+            loanAmount = request.form['loanAmount']
 
 
         df_loan = pd.read_csv('loan_data_new.csv')
@@ -68,31 +72,29 @@ def predictions():
                     'not.fully.paid': 1 # constant value
                                 },ignore_index=True)
 
-    results = {}
+        results = {}
 
-    results['loanAmount'] = loanAmount
+        results['loanAmount'] = loanAmount
 
-    results['vector'] = pd.get_dummies(df_loan.drop('not.fully.paid',axis=1)).iloc[-1:].to_dict('records')
+        results['vector'] = pd.get_dummies(df_loan.drop('not.fully.paid',axis=1)).iloc[-1:].to_dict('records')
 
-    x = pd.get_dummies(df_loan.drop('not.fully.paid',axis=1))
+        x = pd.get_dummies(df_loan.drop('not.fully.paid',axis=1))
 
-    xVector = x.iloc[-1:]
+        xVector = x.iloc[-1:]
 
-    results['prediction'] = rfK.predict(xVector).item()
+        results['prediction'] = rfK.predict(xVector).item()
 
-    mongo.db.resultsDB.insert({"vectorsANDPREDICT": results}, check_keys = False)
+        mongo.db.resultsDB.insert({"vectorsANDPREDICT": results}, check_keys = False)
 
 
-    return redirect('/', code=302) 
+        return redirect('/', code=302) 
 
-    #except:
+    except:
 
-        #return "Please enter valid information"
+        return "Please enter valid information"
 
         
-@app.route("/test")
-def test():
-    return jsonify(mongo.db.resultsDB.find())
+
 
 
 @app.route("/data/results")
