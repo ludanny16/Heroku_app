@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify,redirect,request
 from flask_pymongo import PyMongo
 import pandas as pd
 import numpy as np
-import _pickle as cPickle
+import cPickle
 import os
 
 
