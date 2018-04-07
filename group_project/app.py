@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify,redirect,request
 from flask_pymongo import PyMongo
 import pandas as pd
 import numpy as np
-import pickle
+import _pickle as cPickle
 import os
 
 
@@ -54,7 +54,7 @@ def predictions():
         df_loan = pd.read_csv('loan_data_new.csv')
 
         with open('RFMODEL2','rb') as Model:
-            rfK = pickle.load(Model)
+            rfK = cPickle.load(Model)
 
         df_loan = df_loan.append({'credit.policy': np.float(creditPolicy), 
                     'purpose': purpose,
